@@ -1,9 +1,9 @@
 <?php
 
-class nastixstoreOfficeItemGetProcessor extends modObjectGetProcessor
+class nsDeliveryGetProcessor extends modObjectGetProcessor
 {
-    public $objectType = 'nastixstoreItem';
-    public $classKey = 'nastixstoreItem';
+    public $objectType = 'nsDelivery';
+    public $classKey = 'nsDelivery';
     public $languageTopics = ['nastixstore:default'];
     //public $permission = 'view';
 
@@ -25,4 +25,4 @@ class nastixstoreOfficeItemGetProcessor extends modObjectGetProcessor
 
 }
 
-return 'nastixstoreOfficeItemGetProcessor';
+return 'nsDeliveryGetProcessor';

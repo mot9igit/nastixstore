@@ -1,11 +1,11 @@
 <?php
 
-class nastixstoreOfficeItemEnableProcessor extends modObjectProcessor
+class nsAddressRemoveProcessor extends modObjectProcessor
 {
-    public $objectType = 'nastixstoreItem';
-    public $classKey = 'nastixstoreItem';
+    public $objectType = 'nsAddress';
+    public $classKey = 'nsAddress';
     public $languageTopics = ['nastixstore'];
-    //public $permission = 'save';
+    //public $permission = 'remove';
 
 
     /**
@@ -19,17 +19,16 @@ class nastixstoreOfficeItemEnableProcessor extends modObjectProcessor
 
         $ids = $this->modx->fromJSON($this->getProperty('ids'));
         if (empty($ids)) {
-            return $this->failure($this->modx->lexicon('nastixstore_item_err_ns'));
+            return $this->failure($this->modx->lexicon('nastixstore_address_err_ns'));
         }
 
         foreach ($ids as $id) {
-            /** @var nastixstoreItem $object */
+            /** @var nsDelivery $object */
             if (!$object = $this->modx->getObject($this->classKey, $id)) {
-                return $this->failure($this->modx->lexicon('nastixstore_item_err_nf'));
+                return $this->failure($this->modx->lexicon('nastixstore_address_err_nf'));
             }
 
-            $object->set('active', true);
-            $object->save();
+            $object->remove();
         }
 
         return $this->success();
@@ -37,4 +36,4 @@ class nastixstoreOfficeItemEnableProcessor extends modObjectProcessor
 
 }
 
-return 'nastixstoreOfficeItemEnableProcessor';
+return 'nsAddressRemoveProcessor';

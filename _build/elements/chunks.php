@@ -1,12 +1,20 @@
 <?php
 
 return [
-    'tpl.nastixstore.item' => [
-        'file' => 'item',
+    'ns_minicart' => [
+        'file' => 'ns_minicart',
         'description' => '',
     ],
-    'tpl.nastixstore.office' => [
-        'file' => 'office',
+    'ns_cart' => [
+        'file' => 'ns_cart',
         'description' => '',
     ],
+    'ns_delivery' => [
+        'file' => 'ns_delivery',
+        'description' => '',
+    ],
+    'ns_getorder' => [
+        'file' => 'ns_getorder',
+        'description' => '',
+    ]
 ];

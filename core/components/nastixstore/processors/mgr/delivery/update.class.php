@@ -1,16 +1,16 @@
 <?php
 
-class nastixstoreOfficeItemUpdateProcessor extends modObjectUpdateProcessor
+class nsDeliveryUpdateProcessor extends modObjectUpdateProcessor
 {
-    public $objectType = 'nastixstoreItem';
-    public $classKey = 'nastixstoreItem';
+    public $objectType = 'nsDelivery';
+    public $classKey = 'nsDelivery';
     public $languageTopics = ['nastixstore'];
     //public $permission = 'save';
 
 
     /**
-     * We do a special check of permission
-     * because our objects is not an instances of modAccessibleObject
+     * We doing special check of permission
+     * because of our objects is not an instances of modAccessibleObject
      *
      * @return bool|string
      */
@@ -32,17 +32,17 @@ class nastixstoreOfficeItemUpdateProcessor extends modObjectUpdateProcessor
         $id = (int)$this->getProperty('id');
         $name = trim($this->getProperty('name'));
         if (empty($id)) {
-            return $this->modx->lexicon('nastixstore_item_err_ns');
+            return $this->modx->lexicon('nastixstore_delivery_err_ns');
         }
 
         if (empty($name)) {
-            $this->modx->error->addField('name', $this->modx->lexicon('nastixstore_item_err_name'));
+            $this->modx->error->addField('name', $this->modx->lexicon('nastixstore_delivery_err_name'));
         } elseif ($this->modx->getCount($this->classKey, ['name' => $name, 'id:!=' => $id])) {
-            $this->modx->error->addField('name', $this->modx->lexicon('nastixstore_item_err_ae'));
+            $this->modx->error->addField('name', $this->modx->lexicon('nastixstore_delivery_err_ae'));
         }
 
         return parent::beforeSet();
     }
 }
 
-return 'nastixstoreOfficeItemUpdateProcessor';
+return 'nsDeliveryUpdateProcessor';

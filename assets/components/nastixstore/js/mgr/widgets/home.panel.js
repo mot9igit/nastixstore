@@ -20,13 +20,33 @@ nastixstore.panel.Home = function (config) {
             border: true,
             hideMode: 'offsets',
             items: [{
-                title: _('nastixstore_items'),
+                title: _('nastixstore_address'),
                 layout: 'anchor',
                 items: [{
-                    html: _('nastixstore_intro_msg'),
+                    html: _('nastixstore_address_intro_msg'),
                     cls: 'panel-desc',
                 }, {
-                    xtype: 'nastixstore-grid-items',
+                    xtype: 'nastixstore-grid-address',
+                    cls: 'main-wrapper',
+                }]
+            },{
+                title: _('nastixstore_delivery'),
+                layout: 'anchor',
+                items: [{
+                    html: _('nastixstore_delivery_intro_msg'),
+                    cls: 'panel-desc',
+                }, {
+                    xtype: 'nastixstore-grid-delivery',
+                    cls: 'main-wrapper',
+                }]
+            },{
+                title: _('nastixstore_status'),
+                layout: 'anchor',
+                items: [{
+                    html: _('nastixstore_status_intro_msg'),
+                    cls: 'panel-desc',
+                }, {
+                    xtype: 'nastixstore-grid-status',
                     cls: 'main-wrapper',
                 }]
             }]

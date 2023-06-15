@@ -5,7 +5,7 @@ return [
         'file' => 'nastixstore',
         'description' => '',
         'events' => [
-            'OnManagerPageInit' => [],
+            'OnLoadWebDocument' => [],
         ],
     ],
 ];

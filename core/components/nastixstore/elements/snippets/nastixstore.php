@@ -2,40 +2,38 @@
 /** @var modX $modx */
 /** @var array $scriptProperties */
 /** @var nastixstore $nastixstore */
-$nastixstore = $modx->getService('nastixstore', 'nastixstore', MODX_CORE_PATH . 'components/nastixstore/model/', $scriptProperties);
+$corePath = $modx->getOption('nastixstore_core_path', array(), $modx->getOption('core_path') . 'components/nastixstore/');
+$nastixstore = $modx->getService('nastixstore', 'nastixstore', $corePath . 'model/');
 if (!$nastixstore) {
     return 'Could not load nastixstore class!';
 }
 
 // Do your snippet code here. This demo grabs 5 items from our custom table.
-$tpl = $modx->getOption('tpl', $scriptProperties, 'Item');
-$sortby = $modx->getOption('sortby', $scriptProperties, 'name');
-$sortdir = $modx->getOption('sortbir', $scriptProperties, 'ASC');
-$limit = $modx->getOption('limit', $scriptProperties, 5);
-$outputSeparator = $modx->getOption('outputSeparator', $scriptProperties, "\n");
+$minicartTpl = $modx->getOption('minicartTpl', $scriptProperties, 'ns_minicart');
+$cartTpl = $modx->getOption('cartTpl', $scriptProperties, 'ns_cart');
+$mode = $modx->getOption('mode', $scriptProperties, 'cart');
 $toPlaceholder = $modx->getOption('toPlaceholder', $scriptProperties, false);
 
-// Build query
-$c = $modx->newQuery('nastixstoreItem');
-$c->sortby($sortby, $sortdir);
-$c->where(['active' => 1]);
-$c->limit($limit);
-$items = $modx->getIterator('nastixstoreItem', $c);
+$output = '';
 
-// Iterate through items
-$list = [];
-/** @var nastixstoreItem $item */
-foreach ($items as $item) {
-    $list[] = $modx->getChunk($tpl, $item->toArray());
+$cart = $nastixstore->cartGet();
+$count = 0;
+$cost = 0;
+foreach($cart as $key => $product){
+    $count += $product["count"];
+    $cost += $product["count"]*$product["price"];
+}
+if($mode == 'minicart'){
+    $output = $nastixstore->pdoTools->getChunk($minicartTpl, array("count" => $count, "cost" => $cost));
+}else{
+    $data = array(
+        "products" => $cart,
+        "total" => array(
+            "count" => $count,
+            "cost" => $cost
+        )
+    );
+    $output = $nastixstore->pdoTools->getChunk($cartTpl, $data);
 }
 
-// Output
-$output = implode($outputSeparator, $list);
-if (!empty($toPlaceholder)) {
-    // If using a placeholder, output nothing and set output to specified placeholder
-    $modx->setPlaceholder($toPlaceholder, $output);
-
-    return '';
-}
-// By default just return output
 return $output;

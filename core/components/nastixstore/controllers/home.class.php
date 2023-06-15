@@ -15,7 +15,8 @@ class nastixstoreHomeManagerController extends modExtraManagerController
      */
     public function initialize()
     {
-        $this->nastixstore = $this->modx->getService('nastixstore', 'nastixstore', MODX_CORE_PATH . 'components/nastixstore/model/');
+        $corePath = $this->modx->getOption('nastixstore_core_path', array(), $this->modx->getOption('core_path') . 'components/nastixstore/');
+        $this->nastixstore = $this->modx->getService('nastixstore', 'nastixstore', $corePath . 'model/');
         parent::initialize();
     }
 
@@ -56,8 +57,14 @@ class nastixstoreHomeManagerController extends modExtraManagerController
         $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/nastixstore.js');
         $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/misc/utils.js');
         $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/misc/combo.js');
-        $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/widgets/items.grid.js');
-        $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/widgets/items.windows.js');
+        $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/misc/default.grid.js');
+        $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/misc/default.windows.js');
+        $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/widgets/delivery/grid.js');
+        $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/widgets/delivery/windows.js');
+        $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/widgets/status/grid.js');
+        $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/widgets/status/windows.js');
+        $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/widgets/address/grid.js');
+        $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/widgets/address/windows.js');
         $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/widgets/home.panel.js');
         $this->addJavascript($this->nastixstore->config['jsUrl'] . 'mgr/sections/home.js');
 

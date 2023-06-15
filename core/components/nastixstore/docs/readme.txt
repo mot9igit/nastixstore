@@ -1,7 +1,7 @@
 --------------------
 nastixstore
 --------------------
-Author: John Doe <john@doe.com>
+Author: Nastya <petropav-as@yandex.ru>
 --------------------
 
-A basic Extra for MODx Revolution.
+A eCommerce Extra for MODx Revolution.
